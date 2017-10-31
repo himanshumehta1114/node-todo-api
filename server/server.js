@@ -12,7 +12,16 @@ app.use(bodyParser.json());
 
 // to create a new todo
 app.post('/todos', (req,res) => {
-  console.log(req.body);
+  var Todo = new todo({
+    text: req.body.text
+  });
+
+
+  Todo.save().then((doc) => {
+    res.send(doc);
+  }, (e) => {
+    res.status(400).send(e);
+  });
 });
 
 app.listen(3000, () => {
