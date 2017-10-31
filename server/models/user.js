@@ -9,4 +9,4 @@ var user = mongoose.model('User', {
   }
 });
 
-module.exports{user};
+module.exports = {user};

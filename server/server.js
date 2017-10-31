@@ -1,21 +1,20 @@
+var express = require('express');
+var bodyParser = require('body-parser');
+
 var {mongoose} = require('./db/mongoose.js');
+var {todo} = require('./models/todo');
+var {user} = require('./models/user');
 
-var {todo} = require{'./server/todo'};
+var app = express();
 
-var {user} = require('./server/user');
-//
-// newTodo.save().then((doc) => {
-//   console.log('Saved new todo', doc);
-// }, (e) => {
-//   console.log('Unable to save new todo', e);
-// });
+// tells the system that we want to use json on the page
+app.use(bodyParser.json());
 
-// var newTodo = new todo({
-//   email: 'Himanshu@xyz.com'
-// });
-
-newTodo.save().then((doc) => {
-  console.log(JSON.stringify(doc, undefined, 2));
-}, (e) => {
-  console.log('Unable to save todo', e);
+// to create a new todo
+app.post('/todos', (req,res) => {
+  console.log(req.body);
 });
+
+app.listen(3000, () => {
+  console.log('Started on port 3000');
+})
