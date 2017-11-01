@@ -6,7 +6,7 @@ const {MongoClient, ObjectID} = require('mongodb'); // this is object destructur
 var obj = new ObjectID();
 console.log(obj);
 
-MongoClient.connect('mongodb://localhost:27017/TodoApp', (err,db) => {
+MongoClient.connect('mongodb://user:0000@ds243295.mlab.com:43295/nodetodoapi', (err,db) => {
   if(err) {
     console.log('Unable to connect to mongoDB server');
   }
