@@ -4,6 +4,6 @@ var mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
 //connect to mongoDB database if it is present else create the new one
-mongoose.connect('mongodb://<himanshumehta1114>:<himanshu_1114>@ds243295.mlab.com:43295/nodetodoapi');
+mongoose.connect('mongodb://user:0000@ds243295.mlab.com:43295/nodetodoapi');
 
 module.exports = {mongoose};
