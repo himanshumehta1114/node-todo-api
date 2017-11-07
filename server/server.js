@@ -4,7 +4,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 const {mongoose} = require('./db/mongoose.js');
-const {todo} = require('./models/todo');
+const {Todo} = require('./models/todo');
 const {user} = require('./models/user');
 const {ObjectID} = require('mongodb');
 var {authenticate} = require('./middleware/authenticate');
@@ -16,21 +16,22 @@ var app = express();
 app.use(bodyParser.json());
 
 // to create a new todo
-app.post('/todos', (req,res) => {
-  var Todo = new todo({
-    text: req.body.text
+app.post('/todos', authenticate, (req,res) => {
+  var todo = new Todo({
+    text: req.body.text,
+    _creator: req.user._id
   });
 
 
-  Todo.save().then((doc) => {
+  todo.save().then((doc) => {
     res.send(doc);
   }, (e) => {
     res.status(400).send(e);
   });
 });
 
-app.get('/todos', (req,res) => {
-  todo.find().then((todos) => {
+app.get('/todos',authenticate, (req,res) => {
+  Todo.find({_creator: req.user._id}).then((todos) => {
     res.send({todos});
   },(e) => {
     res.status(400).send(e);
